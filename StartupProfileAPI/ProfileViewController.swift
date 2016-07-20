@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import Alamofire
+import Alamofire
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        self.jsonParser()
+        self.jsonParser()
     }
     
     override func didReceiveMemoryWarning() {
@@ -52,28 +52,28 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
-    //    func jsonParser(){
-    //        Alamofire.request(.GET, apiUrl+apiPath, parameters: nil)
-    //            .validate(statusCode: 200..<300)
-    //            .responseJSON { response in
-    //                if (response.result.error == nil) {
-    //                    if let json = response.result.value as? Dictionary<String, AnyObject> {
-    //                        if let profileJson = json["profiles"] as? Array<Dictionary<String, AnyObject>> {
-    //                            var parseCount = 0
-    //                            for profileInfo in profileJson {
-    //                                let profile = Profile()
-    //                                parseCount = parseCount+1
-    //                                NSLog("JSON Parsing Index: \(parseCount)" + "\r\n" + "JSON Data Parsed --> \(profileInfo)" + "\r\n")
-    //                                profile.populate(profileInfo)
-    //                                self.profileList.append(profile)
-    //                            }
-    //                            self.profileTable.reloadData()
-    //                        }
-    //                    }
-    //                    else {
-    //                        NSLog("HTTP Request failed: \(response.result.error)")
-    //                    }
-    //                }
-    //        }
-    //    }
+        func jsonParser(){
+            Alamofire.request(.GET, apiUrl+apiPath, parameters: nil)
+                .validate(statusCode: 200..<300)
+                .responseJSON { response in
+                    if (response.result.error == nil) {
+                        if let json = response.result.value as? Dictionary<String, AnyObject> {
+                            if let profileJson = json["profiles"] as? Array<Dictionary<String, AnyObject>> {
+                                var parseCount = 0
+                                for profileInfo in profileJson {
+                                    let profile = Profile()
+                                    parseCount = parseCount+1
+                                    NSLog("JSON Parsing Index: \(parseCount)" + "\r\n" + "JSON Data Parsed --> \(profileInfo)" + "\r\n")
+                                    profile.populate(profileInfo)
+                                    self.profileList.append(profile)
+                                }
+                                self.profileTable.reloadData()
+                            }
+                        }
+                        else {
+                            NSLog("HTTP Request failed: \(response.result.error)")
+                        }
+                    }
+            }
+        }
 }
