@@ -11,7 +11,7 @@ import Alamofire
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var profileTable: UITableView!
+    var profileTable: UITableView!
     
     let apiUrl = "https://ff-startup-api.herokuapp.com/api/"
     let apiPath = "profile"
